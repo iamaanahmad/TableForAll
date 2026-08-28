@@ -18,8 +18,8 @@ Group dinners fail in the group chat. The organizer repeats questions, compares 
 ## Current build
 
 The app has two honest modes.
-The public preview shows the full decision loop with local sample data.
-The connected mode stores the same loop in Convex.
+The public app shows the full decision loop with sample guest replies.
+The connected mode stores that loop in Convex.
 It extracts replies with OpenAI, researches with Firecrawl, and verifies AgentMail access.
 
 Convex, Firecrawl, and AgentMail passed live calls on August 28, 2026.
@@ -45,3 +45,9 @@ Dinner only. One city. Three venues. Email replies. One live vote. No booking, p
 - 2026-08-28: Deployed the Convex backend and verified three Firecrawl sources.
 - 2026-08-28: Verified AgentMail scoped access without sending an email.
 - 2026-08-28: Served the public app from Convex HTTP actions.
+
+## Links
+
+- [Live app](https://aware-shark-108.convex.site/)
+- [Public repository](https://github.com/iamaanahmad/TableForAll)
+- [68-second demo video](https://github.com/iamaanahmad/TableForAll/releases/download/hackathon-demo/table-for-all-demo.mp4)
