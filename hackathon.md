@@ -22,9 +22,8 @@ The public app shows the full decision loop with sample guest replies.
 The connected mode stores that loop in Convex.
 It extracts replies with OpenAI, researches with Firecrawl, and verifies AgentMail access.
 
-Convex, Firecrawl, and AgentMail passed live calls on August 28, 2026.
-OpenAI authentication passed, but generation returned `429 insufficient_quota`.
-The public demo shows that limit and uses a narrow fallback for its marked test reply.
+Convex, OpenAI, Firecrawl, and AgentMail passed live calls on August 28, 2026.
+The public demo uses a marked safety reply and never sends an email.
 
 ## Safety
 
@@ -43,6 +42,7 @@ Dinner only. One city. Three venues. Email replies. One live vote. No booking, p
 - 2026-08-27: Added AgentMail inbox polling and a public no-send plan path.
 - 2026-08-27: Passed lint, type checks, three tests, and the production build.
 - 2026-08-28: Deployed the Convex backend and verified three Firecrawl sources.
+- 2026-08-28: Verified OpenAI structured extraction on the marked safety reply.
 - 2026-08-28: Verified AgentMail scoped access without sending an email.
 - 2026-08-28: Served the public app from Convex HTTP actions.
 

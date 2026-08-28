@@ -305,10 +305,6 @@ function Dashboard({
           <span className="activity-dot" /><strong>Latest</strong>
           <span>{snapshot.events[0]?.detail || "Waiting for the next reply"}</span>
           <span className="activity-time">now</span>
-          <a className="tin-credit" href="https://tin.computer" target="_blank" rel="noreferrer">
-            <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#66DC9D" /></svg>
-            Growth by Tin
-          </a>
         </footer>
       </main>
     </div>

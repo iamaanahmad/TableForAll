@@ -8,7 +8,7 @@ Guests reply by email. OpenAI extracts their constraints. Firecrawl researches v
 
 [Open TableForAll](https://aware-shark-108.convex.site/)
 
-Convex serves the app and stores its live state. It checks AgentMail access without sending email. Firecrawl refreshes three public restaurant sources. OpenAI uses structured outputs when the configured account has quota.
+Convex serves the app and stores its live state. It checks AgentMail access without sending email. Firecrawl refreshes three public restaurant sources. OpenAI uses structured outputs for reply extraction.
 
 ## Local preview
 
@@ -56,4 +56,4 @@ npm run build
 
 Never treat extracted menu details as an allergy guarantee. The interface keeps source links visible and requires venue confirmation.
 
-The marked demo path never emails an outside recipient. If OpenAI returns a quota error, the interface labels it and uses a narrow local fallback for the marked safety reply.
+The marked demo path never emails an outside recipient.
