@@ -44,3 +44,4 @@ Dinner only. One city. Three venues. Email replies. One live vote. No booking, p
 - 2026-08-27: Passed lint, type checks, three tests, and the production build.
 - 2026-08-28: Deployed the Convex backend and verified three Firecrawl sources.
 - 2026-08-28: Verified AgentMail scoped access without sending an email.
+- 2026-08-28: Served the public app from Convex HTTP actions.

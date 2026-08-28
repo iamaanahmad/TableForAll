@@ -6,9 +6,9 @@ Guests reply by email. OpenAI extracts their constraints. Firecrawl researches v
 
 ## Live demo
 
-[Open TableForAll](https://iamaanahmad.github.io/TableForAll/)
+[Open TableForAll](https://aware-shark-108.convex.site/)
 
-The public demo uses a live Convex deployment. It checks AgentMail access without sending email. Firecrawl refreshes three public restaurant sources. OpenAI uses structured outputs when the configured account has quota.
+Convex serves the app and stores its live state. It checks AgentMail access without sending email. Firecrawl refreshes three public restaurant sources. OpenAI uses structured outputs when the configured account has quota.
 
 ## Local preview
 

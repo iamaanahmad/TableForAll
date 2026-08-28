@@ -172,7 +172,7 @@ function Dashboard({
     [snapshot.venues],
   );
   const winner = ranked.find((venue) => !venue.excluded);
-  const firecrawlChecks = snapshot.events.filter((event) => event.provider === "firecrawl").length;
+  const firecrawlChecks = snapshot.venues.filter((venue) => venue.sourceCheckedAt).length;
   const providerState = (provider: "openai" | "firecrawl" | "agentmail") => {
     const event = snapshot.events.find((item) => item.provider === provider);
     return event?.status === "failed" ? "failed" : event ? "verified" : "ready";

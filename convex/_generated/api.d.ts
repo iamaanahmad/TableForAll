@@ -8,8 +8,10 @@
  * @module
  */
 
+import type * as http from "../http.js";
 import type * as integrations from "../integrations.js";
 import type * as plans from "../plans.js";
+import type * as staticAssets from "../staticAssets.js";
 
 import type {
   ApiFromModules,
@@ -18,8 +20,10 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  http: typeof http;
   integrations: typeof integrations;
   plans: typeof plans;
+  staticAssets: typeof staticAssets;
 }>;
 
 /**
