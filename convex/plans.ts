@@ -102,6 +102,15 @@ export const getDemoPlan = query({
       ctx.db.query("votes").withIndex("by_plan", (q) => q.eq("planId", plan._id)).collect(),
       ctx.db.query("integrationEvents").withIndex("by_plan", (q) => q.eq("planId", plan._id)).collect(),
     ]);
+    const sortedEvents = events.sort((a, b) => b.createdAt - a.createdAt);
+    const visibleEvents = sortedEvents.slice(0, 8);
+    for (const provider of ["openai", "firecrawl", "agentmail"] as const) {
+      const latestProviderEvent = sortedEvents.find((event) => event.provider === provider);
+      if (latestProviderEvent && !visibleEvents.some((event) => event._id === latestProviderEvent._id)) {
+        visibleEvents.push(latestProviderEvent);
+      }
+    }
+
     return {
       plan,
       guests,
@@ -110,7 +119,7 @@ export const getDemoPlan = query({
         ...venue,
         votes: votes.filter((vote) => vote.venueId === venue._id).length,
       })),
-      events: events.sort((a, b) => b.createdAt - a.createdAt).slice(0, 8),
+      events: visibleEvents.sort((a, b) => b.createdAt - a.createdAt),
     };
   },
 });
