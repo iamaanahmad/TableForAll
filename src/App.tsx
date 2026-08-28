@@ -262,7 +262,7 @@ function Dashboard({
                     <div className="venue-title-row">
                       <div><h3>{venue.name}</h3><p>{venue.neighborhood} · {venue.priceBand}</p></div>
                       {!venue.excluded && (
-                        <button className="vote-button" onClick={() => void onVote(venue.id)} disabled={busy !== null} aria-label={`Vote for ${venue.name}`}>
+                        <button className="vote-button" onClick={() => void onVote(venue.id)} disabled={busy !== null} aria-label={`${venue.votes} votes for ${venue.name}. Cast vote`}>
                           <Vote size={15} /> {venue.votes}
                         </button>
                       )}
