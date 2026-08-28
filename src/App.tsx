@@ -14,6 +14,12 @@ import {
 } from "lucide-react";
 import { api } from "../convex/_generated/api";
 import type { Id } from "../convex/_generated/dataModel";
+import {
+  captureActivationCompleted,
+  captureActivationStarted,
+  captureDashboardView,
+  type ActivationStep,
+} from "./analytics";
 import { applyPreviewReply, castPreviewVote, confirmPreviewPlan, createPreviewPlan } from "./preview";
 import type { PlanSnapshot } from "./types";
 
@@ -82,15 +88,20 @@ function ConnectedApp() {
     void ensureDemoPlan().catch((cause: unknown) => setError(errorMessage(cause)));
   }, [ensureDemoPlan]);
 
+  useEffect(() => captureDashboardView("connected"), []);
+
   if (!raw) return <LoadingShell error={error} />;
   const snapshot = adaptConnectedPlan(raw);
 
-  async function run(action: Exclude<AsyncAction, "vote" | null>, operation: () => Promise<unknown>) {
+  async function run(step: ActivationStep, action: Exclude<AsyncAction, "vote" | null>, operation: () => Promise<unknown>) {
+    captureActivationStarted(step, "connected");
     setBusy(action);
     setError(null);
     try {
       await operation();
+      captureActivationCompleted(step, "connected", "success");
     } catch (cause) {
+      captureActivationCompleted(step, "connected", "failure");
       setError(errorMessage(cause));
     } finally {
       setBusy(null);
@@ -102,20 +113,23 @@ function ConnectedApp() {
       snapshot={snapshot}
       busy={busy}
       error={error}
-      onReply={() => run("reply", syncReply)}
-      onResearch={() => run("research", researchVenues)}
+      onReply={() => run("reply_sync", "reply", syncReply)}
+      onResearch={() => run("venue_research", "research", researchVenues)}
       onVote={async (venueId) => {
+        captureActivationStarted("venue_vote", "connected");
         setBusy("vote");
         setError(null);
         try {
           await castVote({ venueId: venueId as Id<"venues"> });
+          captureActivationCompleted("venue_vote", "connected", "success");
         } catch (cause) {
+          captureActivationCompleted("venue_vote", "connected", "failure");
           setError(errorMessage(cause));
         } finally {
           setBusy(null);
         }
       }}
-      onFinal={() => run("final", sendFinal)}
+      onFinal={() => run("final_plan", "final", sendFinal)}
     />
   );
 }
@@ -124,10 +138,14 @@ function PreviewApp() {
   const [snapshot, setSnapshot] = useState(createPreviewPlan);
   const [busy, setBusy] = useState<AsyncAction>(null);
 
-  async function preview(action: Exclude<AsyncAction, "vote" | null>, update: () => void) {
+  useEffect(() => captureDashboardView("preview"), []);
+
+  async function preview(step: ActivationStep, action: Exclude<AsyncAction, "vote" | null>, update: () => void) {
+    captureActivationStarted(step, "preview");
     setBusy(action);
     await new Promise((resolve) => window.setTimeout(resolve, 500));
     update();
+    captureActivationCompleted(step, "preview", "success");
     setBusy(null);
   }
 
@@ -136,13 +154,17 @@ function PreviewApp() {
       snapshot={snapshot}
       busy={busy}
       error={null}
-      onReply={() => preview("reply", () => setSnapshot(applyPreviewReply))}
-      onResearch={() => preview("research", () => setSnapshot((current) => ({
+      onReply={() => preview("reply_sync", "reply", () => setSnapshot(applyPreviewReply))}
+      onResearch={() => preview("venue_research", "research", () => setSnapshot((current) => ({
         ...current,
         events: [{ id: "preview-research", provider: "preview", kind: "research.previewed", detail: "Three cited venue sources shown in preview", createdAt: Date.now() }, ...current.events],
       })))}
-      onVote={async (venueId) => setSnapshot((current) => castPreviewVote(current, venueId))}
-      onFinal={() => preview("final", () => setSnapshot(confirmPreviewPlan))}
+      onVote={async (venueId) => {
+        captureActivationStarted("venue_vote", "preview");
+        setSnapshot((current) => castPreviewVote(current, venueId));
+        captureActivationCompleted("venue_vote", "preview", "success");
+      }}
+      onFinal={() => preview("final_plan", "final", () => setSnapshot(confirmPreviewPlan))}
     />
   );
 }
