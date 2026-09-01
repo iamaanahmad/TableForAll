@@ -7,6 +7,9 @@ Guests reply by email. OpenAI extracts their constraints. Firecrawl researches v
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Open_App-blue?style=for-the-badge)](https://aware-shark-108.convex.site/)
 [![VibeApps Submission](https://img.shields.io/badge/Hackathon-Submission-orange?style=for-the-badge)](https://vibeapps.dev/s/tableforall)
 
+> [!IMPORTANT]
+> **Note to Judges:** The live `convex.site` URL is running in a marked interactive preview mode to prevent API abuse and unauthorized emails. The complete, fully-functional integrations for OpenAI, Firecrawl, and AgentMail are located in our backend code at `convex/integrations.ts`. Please review the backend code to see the sponsor stack in action!
+
 ---
 
 ## 💡 The Problem
