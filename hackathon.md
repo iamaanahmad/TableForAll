@@ -51,3 +51,4 @@ Dinner only. One city. Three venues. Email replies. One live vote. No booking, p
 - [Live app](https://aware-shark-108.convex.site/)
 - [Public repository](https://github.com/iamaanahmad/TableForAll)
 - [68-second demo video](https://github.com/iamaanahmad/TableForAll/releases/download/hackathon-demo/table-for-all-demo.mp4)
+SUBMITTED LINK: https://vibeapps.dev/s/tableforall

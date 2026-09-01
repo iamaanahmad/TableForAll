@@ -4,3 +4,5 @@ dist
 .env.local
 .convex
 *.tsbuildinfo
+hackathon.md
+hackathon-details.md
